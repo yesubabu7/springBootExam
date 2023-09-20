@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publishing Houses</title>
+    
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Include DataTables CSS and JS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+    <h1>Publishing Houses</h1>
+    <table id="publishingHouseTable" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Publishing houses will be displayed here dynamically -->
+        </tbody>
+    </table>
+
+    <div id="booksContainer" style="display: none;">
+        <h2>Books by Publishing House</h2>
+        <table id="bookTable" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Books will be displayed here dynamically -->
+            </tbody>
+        </table>
+    </div>
+    
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        // Define the viewDetails function in the global scope
+        function viewDetails(publisherId) {
+            // Redirect to the "Books by Publisher" page with the publisherId as a query parameter
+            window.location.href = `/booksById.html?publisherId=${publisherId}`;
+        }
+
+        $(document).ready(function () {
+            let publishingHouseTable;
+            
+            // Fetch publishing house data and populate the DataTable
+            $.ajax({
+                url: "/publishers", // URL to your controller endpoint
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    publishingHouseTable = $('#publishingHouseTable').DataTable({
+                        data: data,
+                        columns: [
+                            { data: "id" },
+                            { data: "name" },
+                            {
+                                // Create a button to view details
+                                data: null,
+                                render: function (data, type, row) {
+                                    return '<button onclick="viewDetails(' + data.id + ')">View Details</button>';
+                                }
+                            }
+                        ]
+                    });
+                },
+                error: function (error) {
+                    console.error("Error fetching data: " + error);
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

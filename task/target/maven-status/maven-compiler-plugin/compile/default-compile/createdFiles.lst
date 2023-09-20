@@ -1,0 +1,10 @@
+com\example\task\RowMapper\BookRowMapper.class
+com\example\task\controllers\BookController.class
+com\example\task\daos\Bookdao.class
+com\example\task\RowMapper\PublishingHouseRowMapper.class
+com\example\task\models\PublishingHouse.class
+com\example\task\TaskApplication.class
+com\example\task\contracts\BookDaoInterface.class
+com\example\task\contracts\BookInterfaceRepository.class
+com\example\task\models\Book.class
+com\example\task\repository\BookRepository.class
