@@ -1,0 +1,15 @@
+-- Insert data into the publishing_house table
+	INSERT INTO publishing_house (name) VALUES
+    ('Publisher A'),
+    ('Publisher B'),
+    ('Publisher C'),
+    ('Publisher D'),
+    ('Publisher E');
+
+-- Insert data into the book table
+INSERT INTO book (title, author, publishing_house_id) VALUES
+    ('Book 1', 'Author 1', 1),
+    ('Book 2', 'Author 2', 1),
+    ('Book 3', 'Author 3', 2),
+    ('Book 4', 'Author 4', 2),
+    ('Book 5', 'Author 5', 3);
